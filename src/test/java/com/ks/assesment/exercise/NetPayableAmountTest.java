@@ -27,7 +27,7 @@ class NetPayableAmountTest {
     void testCalculateNetPayableAmount_AllGroceryItems() {
         Bill bill = createGroceryBill(UserType.CUSTOMER);
         discountCalculationService.calculateNetPayableAmount(bill);
-        assertEquals(bill.getNetAmount(), bill.getPayableAmount());
+        assertEquals(145.0, bill.getPayableAmount());
     }
 
     @Test

@@ -24,13 +24,12 @@ public class DiscountCalculationService {
 	public void calculateNetPayableAmount(Bill bill) {
 
 		validateBill(bill);
+		
+		double discount = 0.0;
 
-		if (isAllGroceryItems(bill)) {
-			bill.setPayableAmount(bill.getNetAmount());
-			return;
+		if (!isAllGroceryItems(bill)) {
+			discount = calculateUserTypeDiscount(bill);
 		}
-
-		double discount = calculateUserTypeDiscount(bill);
 
 		discount += calculateBulkDiscount(bill.getNetAmount());
 

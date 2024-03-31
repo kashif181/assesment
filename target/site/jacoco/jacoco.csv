@@ -3,7 +3,7 @@ exercise,com.ks.assesment.exercise.dto.user,UserType,0,27,0,0,0,5,0,1,0,1
 exercise,com.ks.assesment.exercise.dto.user,User.UserBuilder,8,21,0,0,0,1,1,4,1,4
 exercise,com.ks.assesment.exercise.dto.user,User,149,25,30,0,3,3,24,4,9,4
 exercise,com.ks.assesment.exercise.dto.user,User.UserBuilderImpl,0,7,0,0,0,1,0,2,0,2
-exercise,com.ks.assesment.exercise.service,DiscountCalculationService,0,108,0,8,0,22,0,13,0,9
+exercise,com.ks.assesment.exercise.service,DiscountCalculationService,0,105,0,8,0,21,0,13,0,9
 exercise,com.ks.assesment.exercise.dto.billing,Item.ItemBuilder,10,35,0,0,0,1,1,6,1,6
 exercise,com.ks.assesment.exercise.dto.billing,Item,161,28,26,0,3,5,23,5,10,5
 exercise,com.ks.assesment.exercise.dto.billing,ItemCategory,0,21,0,0,0,4,0,1,0,1
