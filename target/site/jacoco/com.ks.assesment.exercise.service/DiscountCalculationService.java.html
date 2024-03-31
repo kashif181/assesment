@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DiscountCalculationService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">exercise</a> &gt; <a href="index.source.html" class="el_package">com.ks.assesment.exercise.service</a> &gt; <span class="el_source">DiscountCalculationService.java</span></div><h1>DiscountCalculationService.java</h1><pre class="source lang-java linenums">package com.ks.assesment.exercise.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.ks.assesment.exercise.discount.DiscountStrategy;
+import com.ks.assesment.exercise.dto.billing.Bill;
+import com.ks.assesment.exercise.dto.billing.ItemCategory;
+
+@Service
+public class DiscountCalculationService {
+
+	private static final double BULK_DISCOUNT_AMOUNT = 5;
+	
+	private static final double BULK_DISCOUNT_THRESHOLD = 100;
+
+	private final List&lt;DiscountStrategy&gt; discountStrategies;
+
+<span class="fc" id="L20">	public DiscountCalculationService(List&lt;DiscountStrategy&gt; discountStrategies) {</span>
+<span class="fc" id="L21">		this.discountStrategies = discountStrategies;</span>
+<span class="fc" id="L22">	}</span>
+
+	public void calculateNetPayableAmount(Bill bill) {
+
+<span class="fc" id="L26">		validateBill(bill);</span>
+
+<span class="fc bfc" id="L28" title="All 2 branches covered.">		if (isAllGroceryItems(bill)) {</span>
+<span class="fc" id="L29">			bill.setPayableAmount(bill.getNetAmount());</span>
+<span class="fc" id="L30">			return;</span>
+		}
+
+<span class="fc" id="L33">		double discount = calculateUserTypeDiscount(bill);</span>
+
+<span class="fc" id="L35">		discount += calculateBulkDiscount(bill.getNetAmount());</span>
+
+<span class="fc" id="L37">		double netPayableAmount = Math.max(bill.getNetAmount() - discount, 0);</span>
+		
+<span class="fc" id="L39">		bill.setDiscount(discount);</span>
+
+<span class="fc" id="L41">		bill.setPayableAmount(netPayableAmount);</span>
+<span class="fc" id="L42">	}</span>
+
+	public double calculateUserTypeDiscount(Bill bill) {
+<span class="fc" id="L45">		return discountStrategies.stream().filter(strategy -&gt; strategy.supports(bill.getUser().getUserType()))</span>
+<span class="fc" id="L46">				.findFirst().map(discountStrategy -&gt; discountStrategy.calculateDiscount(bill)).orElse(0.0);</span>
+	}
+
+	public void validateBill(Bill bill) {
+<span class="fc bfc" id="L50" title="All 2 branches covered.">		if (bill == null) {</span>
+<span class="fc" id="L51">			throw new IllegalArgumentException(&quot;Bill cannot be null&quot;);</span>
+		}
+
+<span class="fc bfc" id="L54" title="All 2 branches covered.">		if (bill.getUser() == null) {</span>
+<span class="fc" id="L55">			throw new IllegalArgumentException(&quot;User in bill cannot be null&quot;);</span>
+		}
+<span class="fc" id="L57">	}</span>
+
+	public double calculateBulkDiscount(double billAmount) {
+<span class="fc" id="L60">		return (int) (billAmount / BULK_DISCOUNT_THRESHOLD) * BULK_DISCOUNT_AMOUNT;</span>
+	}
+
+	public boolean isAllGroceryItems(final Bill bill) {
+<span class="fc bfc" id="L64" title="All 2 branches covered.">		return bill.getItems().stream().allMatch(item -&gt; item.getCategory() == ItemCategory.GROCERY);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

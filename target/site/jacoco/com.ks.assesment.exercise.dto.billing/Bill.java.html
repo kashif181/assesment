@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Bill.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">exercise</a> &gt; <a href="index.source.html" class="el_package">com.ks.assesment.exercise.dto.billing</a> &gt; <span class="el_source">Bill.java</span></div><h1>Bill.java</h1><pre class="source lang-java linenums">package com.ks.assesment.exercise.dto.billing;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import com.ks.assesment.exercise.dto.user.User;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+<span class="pc bnc" id="L14" title="All 28 branches missed.">@Data</span>
+<span class="fc" id="L15">@AllArgsConstructor</span>
+<span class="nc" id="L16">@NoArgsConstructor</span>
+<span class="pc" id="L17">@Builder</span>
+public class Bill {
+    private List&lt;Item&gt; items;
+    private User user;
+    private double netAmount;
+<span class="nc" id="L22">    private double discount;</span>
+<span class="fc" id="L23">    private double payableAmount;</span>
+
+    public double getNetAmount() {
+<span class="fc" id="L26">        double totalAmount = 0;</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        for (Item item : items) {</span>
+<span class="fc" id="L28">            totalAmount += item.getPrice() * item.getQuantity();</span>
+<span class="fc" id="L29">        }</span>
+<span class="fc" id="L30">        this.netAmount = totalAmount;</span>
+<span class="fc" id="L31">        return netAmount;</span>
+    }
+    
+    public List&lt;Item&gt; getItems() {
+<span class="fc" id="L35">        return Collections.unmodifiableList(items);</span>
+    }
+    
+    public void setItems(List&lt;Item&gt; items) {
+<span class="nc" id="L39">        this.items = new ArrayList&lt;&gt;(items);</span>
+<span class="nc" id="L40">    }</span>
+
+    public User getUser() {
+<span class="fc" id="L43">        return user;</span>
+    }
+
+    public void setUser(User user) {
+<span class="nc" id="L47">        this.user = user;</span>
+<span class="nc" id="L48">    }</span>
+    
+    @Override
+    public String toString() {
+<span class="nc" id="L52">        StringBuilder sb = new StringBuilder(500)</span>
+<span class="nc" id="L53">        .append(&quot;\n=====================================\nBill\n=====================================\n&quot;)</span>
+<span class="nc" id="L54">        .append(&quot;User: &quot;).append(user.getUserId()).append('\n')</span>
+<span class="nc" id="L55">        .append(&quot;-------------------------------------\n&quot;)</span>
+<span class="nc" id="L56">        .append(&quot;Items:\n&quot;);</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        for (Item item : items) {</span>
+<span class="nc" id="L58">            sb.append(item.getName()).append(&quot;\t\t&quot;).append(item.getPrice()).append(&quot;\t\t&quot;).append(item.getQuantity()).append('\n');</span>
+<span class="nc" id="L59">        }</span>
+<span class="nc" id="L60">        sb.append(&quot;-------------------------------------\n&quot;)</span>
+<span class="nc" id="L61">        .append(&quot;Net Amount:\t\t&quot;).append(netAmount).append('\n')</span>
+<span class="nc" id="L62">        .append(&quot;Discount:\t\t&quot;).append(discount).append('\n')</span>
+<span class="nc" id="L63">        .append(&quot;Payable Amount:\t\t&quot;).append(payableAmount).append('\n')</span>
+<span class="nc" id="L64">        .append(&quot;=====================================\n&quot;);</span>
+<span class="nc" id="L65">        return sb.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
