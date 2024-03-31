@@ -17,20 +17,20 @@ import com.ks.assesment.exercise.dto.user.UserType;
 import com.ks.assesment.exercise.service.DiscountCalculationService;
 
 @SpringBootTest
-public class NetPayableAmountTest {
+class NetPayableAmountTest {
 
     @Autowired
     private DiscountCalculationService discountCalculationService;
 
     @Test
-    public void testCalculateNetPayableAmount_AllGroceryItems() {
+    void testCalculateNetPayableAmount_AllGroceryItems() {
         Bill bill = createGroceryBill(UserType.CUSTOMER);
         discountCalculationService.calculateNetPayableAmount(bill);
         assertEquals(bill.getNetAmount(), bill.getPayableAmount());
     }
 
     @Test
-    public void testCalculateNetPayableAmount_NotGroceryItemsEmployee() {
+    void testCalculateNetPayableAmount_NotGroceryItemsEmployee() {
         User user = User.builder().userId("1").userType(UserType.EMPLOYEE).build();
         Bill bill = createNonGroceryBill(user);
         discountCalculationService.calculateNetPayableAmount(bill);
@@ -38,7 +38,7 @@ public class NetPayableAmountTest {
     }
     
     @Test
-    public void testCalculateNetPayableAmount_NotGroceryItemsAffiliate() {
+    void testCalculateNetPayableAmount_NotGroceryItemsAffiliate() {
     	User user = User.builder().userId("1").userType(UserType.AFFILIATE).build();
         Bill bill = createNonGroceryBill(user);
         discountCalculationService.calculateNetPayableAmount(bill);
@@ -46,7 +46,7 @@ public class NetPayableAmountTest {
     }
     
     @Test
-    public void testCalculateNetPayableAmount_NotGroceryItemsCustomer() {
+    void testCalculateNetPayableAmount_NotGroceryItemsCustomer() {
     	Customer cutomer = Customer.builder().userId("1").userType(UserType.CUSTOMER).registrationDate(LocalDate.now().minusYears(3)).build();
         Bill bill = createNonGroceryBill(cutomer);
         discountCalculationService.calculateNetPayableAmount(bill);
@@ -54,7 +54,7 @@ public class NetPayableAmountTest {
     }
     
     @Test
-    public void testCalculateNetPayableAmount_NotGroceryItemsNewCustomer() {
+    void testCalculateNetPayableAmount_NotGroceryItemsNewCustomer() {
     	Customer cutomer = Customer.builder().userId("1").userType(UserType.CUSTOMER).registrationDate(LocalDate.now().minusYears(1)).build();
         Bill bill = createNonGroceryBill(cutomer);
         discountCalculationService.calculateNetPayableAmount(bill);
@@ -62,7 +62,7 @@ public class NetPayableAmountTest {
     }
     
     @Test
-    public void testCalculateNetPayableAmount_NotGroceryItemsCustomerNoRegistration() {
+    void testCalculateNetPayableAmount_NotGroceryItemsCustomerNoRegistration() {
     	Customer cutomer = Customer.builder().userId("1").userType(UserType.CUSTOMER).build();
         Bill bill = createNonGroceryBill(cutomer);
         discountCalculationService.calculateNetPayableAmount(bill);

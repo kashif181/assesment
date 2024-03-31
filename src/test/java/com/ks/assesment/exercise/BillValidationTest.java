@@ -14,7 +14,7 @@ import com.ks.assesment.exercise.dto.user.UserType;
 import com.ks.assesment.exercise.service.DiscountCalculationService;
 
 @SpringBootTest
-public class BillValidationTest {
+class BillValidationTest {
 
     @Autowired
     private DiscountCalculationService discountCalculationService;

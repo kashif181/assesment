@@ -9,20 +9,20 @@ import com.ks.assesment.exercise.service.DiscountCalculationService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class BulkDiscountTest {
+class BulkDiscountTest {
 
     @Autowired
     private DiscountCalculationService discountCalculationService;
 
     @Test
-    public void testCalculateBulkDiscountBelow_100() {
+    void testCalculateBulkDiscountBelow_100() {
         double billAmount = 50.0;
         double discount = discountCalculationService.calculateBulkDiscount(billAmount);
         assertEquals(0, discount);
     }
 
     @Test
-    public void testCalculateBulkDiscountOver_100() {
+    void testCalculateBulkDiscountOver_100() {
         double billAmount = 200.0;
         double discount = discountCalculationService.calculateBulkDiscount(billAmount);
         assertEquals(10.0, discount);

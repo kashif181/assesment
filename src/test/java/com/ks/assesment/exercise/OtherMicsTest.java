@@ -11,13 +11,13 @@ import com.ks.assesment.exercise.discount.EmployeeDiscountStrategy;
 import com.ks.assesment.exercise.dto.user.UserType;;
 
 @SpringBootTest
-public class OtherMicsTest {
+class OtherMicsTest {
 
 	@Autowired
 	private EmployeeDiscountStrategy employeeDiscountStrategy;
 
 	@Test
-	public void testSupports() {
+	void testSupports() {
 		UserType userTypeEmployee = UserType.EMPLOYEE;
 		UserType userTypeCustomer = UserType.CUSTOMER;
 		assertTrue(employeeDiscountStrategy.supports(userTypeEmployee));

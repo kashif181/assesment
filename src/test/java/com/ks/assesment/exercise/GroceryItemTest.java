@@ -17,19 +17,19 @@ import com.ks.assesment.exercise.dto.user.UserType;
 import com.ks.assesment.exercise.service.DiscountCalculationService;
 
 @SpringBootTest
-public class GroceryItemTest {
+class GroceryItemTest {
 
     @Autowired
     private DiscountCalculationService discountCalculationService;
 
     @Test
-    public void testIsAllGroceryItems_AllGroceries() {
+    void testIsAllGroceryItems_AllGroceries() {
         Bill bill = createGroceryBill(UserType.CUSTOMER);
         assertTrue(discountCalculationService.isAllGroceryItems(bill));
     }
 
     @Test
-    public void testIsAllGroceryItems_NotAllGroceries() {
+    void testIsAllGroceryItems_NotAllGroceries() {
         Bill bill = createNonGroceryBill(UserType.CUSTOMER);
         assertFalse(discountCalculationService.isAllGroceryItems(bill));
     }
