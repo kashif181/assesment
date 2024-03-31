@@ -2,12 +2,11 @@ package com.ks.assesment.exercise.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ks.assesment.exercise.discount.DiscountStrategy;
 import com.ks.assesment.exercise.dto.billing.Bill;
-import com.ks.assesment.exercise.dto.billing.ItemCategory;;
+import com.ks.assesment.exercise.dto.billing.ItemCategory;
 
 @Service
 public class DiscountCalculationService {
@@ -16,7 +15,6 @@ public class DiscountCalculationService {
 	
 	private static final double BULK_DISCOUNT_THRESHOLD = 100;
 
-	@Autowired
 	private final List<DiscountStrategy> discountStrategies;
 
 	public DiscountCalculationService(List<DiscountStrategy> discountStrategies) {

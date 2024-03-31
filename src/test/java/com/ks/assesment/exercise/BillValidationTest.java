@@ -20,7 +20,7 @@ public class BillValidationTest {
     private DiscountCalculationService discountCalculationService;
 
     @Test
-    public void testValidateBill_NullBill() {
+    void testValidateBill_NullBill() {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             discountCalculationService.validateBill(null);
         });
@@ -29,7 +29,7 @@ public class BillValidationTest {
     }
 
     @Test
-    public void testValidateBill_NullUser() {
+    void testValidateBill_NullUser() {
         Bill billWithNullUser = Bill.builder().user(null).build();
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             discountCalculationService.validateBill(billWithNullUser);
@@ -39,7 +39,7 @@ public class BillValidationTest {
     }
 
     @Test
-    public void testValidateBill_ValidBill() {
+    void testValidateBill_ValidBill() {
         User user = User.builder().userId("1").userType(UserType.CUSTOMER).build();
         Bill validBill = Bill.builder().user(user).build();
         assertDoesNotThrow(() -> discountCalculationService.validateBill(validBill));
