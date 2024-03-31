@@ -35,6 +35,8 @@ public class DiscountCalculationService {
 		discount += calculateBulkDiscount(bill.getNetAmount());
 
 		double netPayableAmount = Math.max(bill.getNetAmount() - discount, 0);
+		
+		bill.setDiscount(discount);
 
 		bill.setPayableAmount(netPayableAmount);
 	}

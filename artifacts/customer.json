@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "name": "TV",
+      "price": 500.0,
+      "quantity": 1,
+      "category": "ELECTRONICS"
+    },
+    {
+      "name": "Shirt",
+      "price": 100.0,
+      "quantity": 2,
+      "category": "CLOTHING"
+    }
+  ],
+  "user": {
+    "userId": 12345,
+    "userType": "CUSTOMER",
+	"registrationDate": "2022-03-30"
+  },
+  "netAmount": 500.0
+}

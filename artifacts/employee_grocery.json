@@ -1,0 +1,21 @@
+{
+  "items": [
+    {
+      "name": "Rice",
+      "price": 500.0,
+      "quantity": 1,
+      "category": "GROCERY"
+    },
+    {
+      "name": "Bread",
+      "price": 100.0,
+      "quantity": 2,
+      "category": "GROCERY"
+    }
+  ],
+  "user": {
+    "userId": 12345,
+    "userType": "EMPLOYEE"
+  },
+  "netAmount": 500.0
+}

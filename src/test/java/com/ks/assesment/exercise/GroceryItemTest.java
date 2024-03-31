@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.ks.assesment.exercise.dto.billing.Bill;
 import com.ks.assesment.exercise.dto.billing.Item;
@@ -17,6 +18,7 @@ import com.ks.assesment.exercise.dto.user.UserType;
 import com.ks.assesment.exercise.service.DiscountCalculationService;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class GroceryItemTest {
 
     @Autowired

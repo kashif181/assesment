@@ -7,16 +7,17 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.ks.assesment.exercise.dto.billing.Bill;
 import com.ks.assesment.exercise.dto.billing.Item;
 import com.ks.assesment.exercise.dto.billing.ItemCategory;
-import com.ks.assesment.exercise.dto.user.Customer;
 import com.ks.assesment.exercise.dto.user.User;
 import com.ks.assesment.exercise.dto.user.UserType;
 import com.ks.assesment.exercise.service.DiscountCalculationService;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class NetPayableAmountTest {
 
     @Autowired
@@ -47,7 +48,7 @@ class NetPayableAmountTest {
     
     @Test
     void testCalculateNetPayableAmount_NotGroceryItemsCustomer() {
-    	Customer cutomer = Customer.builder().userId("1").userType(UserType.CUSTOMER).registrationDate(LocalDate.now().minusYears(3)).build();
+    	User cutomer = User.builder().userId("1").userType(UserType.CUSTOMER).registrationDate(LocalDate.now().minusYears(3)).build();
         Bill bill = createNonGroceryBill(cutomer);
         discountCalculationService.calculateNetPayableAmount(bill);
         assertEquals(137.5, bill.getPayableAmount());
@@ -55,7 +56,7 @@ class NetPayableAmountTest {
     
     @Test
     void testCalculateNetPayableAmount_NotGroceryItemsNewCustomer() {
-    	Customer cutomer = Customer.builder().userId("1").userType(UserType.CUSTOMER).registrationDate(LocalDate.now().minusYears(1)).build();
+    	User cutomer = User.builder().userId("1").userType(UserType.CUSTOMER).registrationDate(LocalDate.now().minusYears(1)).build();
         Bill bill = createNonGroceryBill(cutomer);
         discountCalculationService.calculateNetPayableAmount(bill);
         assertEquals(145.0, bill.getPayableAmount());
@@ -63,7 +64,7 @@ class NetPayableAmountTest {
     
     @Test
     void testCalculateNetPayableAmount_NotGroceryItemsCustomerNoRegistration() {
-    	Customer cutomer = Customer.builder().userId("1").userType(UserType.CUSTOMER).build();
+    	User cutomer = User.builder().userId("1").userType(UserType.CUSTOMER).build();
         Bill bill = createNonGroceryBill(cutomer);
         discountCalculationService.calculateNetPayableAmount(bill);
         assertEquals(145.0, bill.getPayableAmount());

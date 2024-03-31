@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import org.springframework.stereotype.Component;
 
 import com.ks.assesment.exercise.dto.billing.Bill;
-import com.ks.assesment.exercise.dto.user.Customer;
 import com.ks.assesment.exercise.dto.user.UserType;
 
 @Component
@@ -14,10 +13,8 @@ public class CustomerDiscountStrategy implements DiscountStrategy {
 
     @Override
     public double calculateDiscount(Bill bill) {
-        
-    	Customer customer = (Customer)bill.getUser();
     	
-        if (customer.getRegistrationDate() != null && customer.getRegistrationDate() .isBefore(LocalDate.now().minusYears(2))) {
+        if (bill.getUser().getRegistrationDate() != null && bill.getUser().getRegistrationDate() .isBefore(LocalDate.now().minusYears(2))) {
         	return (DISCOUNT_PERCENTAGE / 100) * bill.getNetAmount();
         }
         return 0;

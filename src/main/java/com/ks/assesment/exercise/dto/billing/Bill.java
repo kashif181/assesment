@@ -6,10 +6,14 @@ import java.util.List;
 
 import com.ks.assesment.exercise.dto.user.User;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Bill {
     private List<Item> items;
@@ -41,5 +45,23 @@ public class Bill {
 
     public void setUser(User user) {
         this.user = user;
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(500)
+        .append("\n=====================================\nBill\n=====================================\n")
+        .append("User: ").append(user.getUserId()).append('\n')
+        .append("-------------------------------------\n")
+        .append("Items:\n");
+        for (Item item : items) {
+            sb.append(item.getName()).append("\t\t").append(item.getPrice()).append("\t\t").append(item.getQuantity()).append('\n');
+        }
+        sb.append("-------------------------------------\n")
+        .append("Net Amount:\t\t").append(netAmount).append('\n')
+        .append("Discount:\t\t").append(discount).append('\n')
+        .append("Payable Amount:\t\t").append(payableAmount).append('\n')
+        .append("=====================================\n");
+        return sb.toString();
     }
 }
